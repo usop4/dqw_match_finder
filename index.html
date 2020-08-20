@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>dqw match finder</title>
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+    <!--
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    -->
+    <style>
+      .vertical {
+        writing-mode: vertical-rl;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="app">
+
+      <h1>dqw match finder</h1>
+
+      <div class="row mb-3">
+
+        <div class="col-md-2 themed-grid-col">
+
+          <label for="range-1">コスト {{ cost }}</label>
+          <b-form-input id="range-1" v-model="cost" type="range" min="0" max="500"></b-form-input>
+  
+          <div class="form-check">
+            <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
+            <label class="form-check-label" for="j1">戦士</label>
+          </div>
+          <div class="form-check">
+            <input value="魔法使い" v-model="job" class="form-check-input" type="radio" name="job" id="j2">
+            <label class="form-check-label" for="j2">魔法使い</label>
+          </div>
+          <div class="form-check">
+            <input value="僧侶" v-model="job" class="form-check-input" type="radio" name="job" id="j3">
+            <label class="form-check-label" for="j3">僧侶</label>
+          </div>
+          <div class="form-check">
+            <input value="武闘家" v-model="job" class="form-check-input" type="radio" name="job" id="j4">
+            <label class="form-check-label" for="j4">武闘家</label>
+          </div>
+          <div class="form-check">
+            <input value="盗賊" v-model="job" class="form-check-input" type="radio" name="job" id="j5">
+            <label class="form-check-label" for="j5">盗賊</label>
+          </div>
+          <div class="form-check">
+            <input value="レンジャー" v-model="job" class="form-check-input" type="radio" name="job" id="j6">
+            <label class="form-check-label" for="j6">レンジャー</label>
+          </div>
+          <div class="form-check">
+            <input value="賢者" v-model="job" class="form-check-input" type="radio" name="job" id="j7">
+            <label class="form-check-label" for="j7">賢者</label>
+          </div>
+          <div class="form-check">
+            <input value="バトルマスター" v-model="job" class="form-check-input" type="radio" name="job" id="j8">
+            <label class="form-check-label" for="j8">バトルマスター</label>
+          </div>
+          <div class="form-check">
+            <input value="魔法戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j9">
+            <label class="form-check-label" for="j9">魔法戦士</label>
+          </div>
+          <div class="form-check">
+            <input value="パラディン" v-model="job" class="form-check-input" type="radio" name="job" id="j10">
+            <label class="form-check-label" for="j10">パラディン</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-10 themed-grid-col">
+          <b-table :items="listCombis()" :fields="fields"></b-table>
+          <!--
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>組み合わせ</th>
+                <th>コスト</th>
+                <th>HP</th>
+                <th>MP</th>
+                <th><span class="vertical">ちから</span></th>
+                <th><span class="vertical">みのまもり</span></th>
+                <th><span class="vertical">こうげき魔力</span></th>
+                <th><span class="vertical">かいふく魔力</span></th>
+                <th><span class="vertical">すばやさ</span></th>
+                <th><span class="vertical">きようさ</span></th>
+              </tr>  
+            </thead>
+            <tbody>
+              <tr v-for="(combi,i) in listCombis()">
+                <td>{{ combi.name }}</td>
+                <td>{{ combi.cost }}</td>
+                <td>{{ combi.hp }}</td>
+                <td>{{ combi.mp }}</td>
+                <td>{{ combi.power }}</td>
+                <td>{{ combi.defense }}</td>
+                <td>{{ combi.attack }}</td>
+                <td>{{ combi.recover }}</td>
+                <td>{{ combi.speed }}</td>
+                <td>{{ combi.skill }}</td>
+              </tr>  
+            </tbody>
+          </table>
+          -->
+        </div>
+
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2020 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+    <!-- Load Vue followed by BootstrapVue -->
+    <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+    <!-- Load the following for BootstrapVueIcons support -->
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js" type="module"></script>
+    <script>
+      const log = (val) => {
+        console.log(val);
+      }
+    </script>
+  </body>
+</html>
