@@ -150,6 +150,26 @@ export function return_all_combis2(val, job, cost) {
 }
 
 /**
+* @param {any} val
+* @param {string} job
+* @param {number} cost
+* @param {string} param
+* @returns {any}
+*/
+export function return_all_combis3(val, job, cost, param) {
+    try {
+        var ptr0 = passStringToWasm0(job, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len0 = WASM_VECTOR_LEN;
+        var ptr1 = passStringToWasm0(param, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len1 = WASM_VECTOR_LEN;
+        var ret = wasm.return_all_combis3(addBorrowedObject(val), ptr0, len0, cost, ptr1, len1);
+        return takeObject(ret);
+    } finally {
+        heap[stack_pointer++] = undefined;
+    }
+}
+
+/**
 * @returns {string}
 */
 export function function_test() {
@@ -216,6 +236,9 @@ async function init(input) {
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
+    };
+    imports.wbg.__wbg_log_682923c8ea4d4d53 = function(arg0, arg1) {
+        log(getStringFromWasm0(arg0, arg1));
     };
 
     if (typeof input === 'string' || (typeof Request === 'function' && input instanceof Request) || (typeof URL === 'function' && input instanceof URL)) {

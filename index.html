@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>dqw match finder</title>
-    <!-- Load required Bootstrap and BootstrapVue CSS -->
+
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
 
-    <!--
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    -->
     <style>
       .vertical {
         writing-mode: vertical-rl;
@@ -28,7 +25,7 @@
         <div class="col-md-2 themed-grid-col">
 
           <label for="range-1">コスト {{ cost }}</label>
-          <b-form-input id="range-1" v-model="cost" type="range" min="0" max="500"></b-form-input>
+          <b-form-input id="range-1" v-model="cost" type="range" min="0" max="350"></b-form-input>
   
           <div class="form-check">
             <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
@@ -74,26 +71,38 @@
 
 
         <div class="col-md-10 themed-grid-col">
-          <b-table :items="listCombis()" :fields="fields"></b-table>
           <!--
-          <table class="table table-sm">
+          <b-table :items="listCombis()" :fields="fields"></b-table>
+          -->
+          <table class="table table-sm table-bordered">
             <thead>
               <tr>
-                <th>組み合わせ</th>
-                <th>コスト</th>
-                <th>HP</th>
-                <th>MP</th>
+                <th><span class="vertical">コスト</span></th>
+                <th><span class="vertical">ＨＰ</span></th>
+                <th><span class="vertical">ＭＰ</span></th>
                 <th><span class="vertical">ちから</span></th>
                 <th><span class="vertical">みのまもり</span></th>
                 <th><span class="vertical">こうげき魔力</span></th>
                 <th><span class="vertical">かいふく魔力</span></th>
                 <th><span class="vertical">すばやさ</span></th>
                 <th><span class="vertical">きようさ</span></th>
+                <th>組み合わせ {{ combi_num }}</th>
               </tr>  
             </thead>
             <tbody>
+              <tr>
+                <td><span><input value="cost" v-model="param" type="radio"></span></td>
+                <td><input value="hp" v-model="param" type="radio"></td>
+                <td><input value="mp" v-model="param" type="radio"></td>
+                <td><input value="power" v-model="param" type="radio"></td>
+                <td><input value="defense" v-model="param" type="radio"></td>
+                <td><input value="attack" v-model="param" type="radio"></td>
+                <td><input value="recover" v-model="param" type="radio"></td>
+                <td><input value="speed" v-model="param" type="radio"></td>
+                <td><input value="skill" v-model="param" type="radio"></td>
+                <td>-</td>
+              </tr>
               <tr v-for="(combi,i) in listCombis()">
-                <td>{{ combi.name }}</td>
                 <td>{{ combi.cost }}</td>
                 <td>{{ combi.hp }}</td>
                 <td>{{ combi.mp }}</td>
@@ -103,32 +112,17 @@
                 <td>{{ combi.recover }}</td>
                 <td>{{ combi.speed }}</td>
                 <td>{{ combi.skill }}</td>
+                <td>{{ combi.name }}</td>
               </tr>  
             </tbody>
           </table>
-          -->
         </div>
 
       </div>
 
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2020 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
-    </div>
-
-    <!-- Load polyfills to support older browsers -->
-    <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
-
-    <!-- Load Vue followed by BootstrapVue -->
     <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
 
-    <!-- Load the following for BootstrapVueIcons support -->
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
