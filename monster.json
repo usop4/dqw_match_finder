@@ -268,17 +268,17 @@
     },
     {
       "id": 19,
-      "name": "\u30d8\u30eb\u30b8\u30e5\u30e9\u30b7\u30c3\u30afA",
+      "name": "\u30d8\u30eb\u30b8\u30e5\u30e9\u30b7\u30c3\u30afS",
       "cost": 84,
       "color": "\u9ec4",
-      "hp": 101,
-      "mp": 17,
-      "power": 28,
-      "defense": 84,
-      "attack": 16,
-      "recover": 16,
-      "speed": 11,
-      "skill": 18
+      "hp": 115,
+      "mp": 19,
+      "power": 32,
+      "defense": 96,
+      "attack": 18,
+      "recover": 18,
+      "speed": 13,
+      "skill": 20
     },
     {
       "id": 20,
@@ -618,17 +618,17 @@
     },
     {
       "id": 44,
-      "name": "\u7a76\u6975\u30a8\u30d3\u30eb\u30d7\u30ea\u30fc\u30b9\u30c8A",
+      "name": "\u7a76\u6975\u30a8\u30d3\u30eb\u30d7\u30ea\u30fc\u30b9\u30c8S",
       "cost": 77,
       "color": "\u9752",
-      "hp": 71,
-      "mp": 52,
-      "power": 43,
-      "defense": 42,
-      "attack": 25,
-      "recover": 28,
-      "speed": 72,
-      "skill": 56
+      "hp": 91,
+      "mp": 66,
+      "power": 55,
+      "defense": 53,
+      "attack": 32,
+      "recover": 35,
+      "speed": 91,
+      "skill": 71
     },
     {
       "id": 45,

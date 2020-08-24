@@ -3,40 +3,19 @@
 /**
 * @param {any} val
 * @param {string} job
-* @returns {any}
-*/
-export function return_all_combis(val: any, job: string): any;
-/**
-* @param {any} val
-* @param {string} job
-* @param {number} cost
-* @returns {any}
-*/
-export function return_all_combis2(val: any, job: string, cost: number): any;
-/**
-* @param {any} val
-* @param {string} job
 * @param {number} cost
 * @param {string} param
 * @returns {any}
 */
 export function return_all_combis3(val: any, job: string, cost: number, param: string): any;
-/**
-* @returns {string}
-*/
-export function function_test(): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly return_all_combis: (a: number, b: number, c: number) => number;
-  readonly return_all_combis2: (a: number, b: number, c: number, d: number) => number;
   readonly return_all_combis3: (a: number, b: number, c: number, d: number, e: number, f: number) => number;
-  readonly function_test: (a: number) => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
-  readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
 /**

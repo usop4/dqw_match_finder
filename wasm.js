@@ -119,39 +119,6 @@ function takeObject(idx) {
 /**
 * @param {any} val
 * @param {string} job
-* @returns {any}
-*/
-export function return_all_combis(val, job) {
-    try {
-        var ptr0 = passStringToWasm0(job, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        var ret = wasm.return_all_combis(addBorrowedObject(val), ptr0, len0);
-        return takeObject(ret);
-    } finally {
-        heap[stack_pointer++] = undefined;
-    }
-}
-
-/**
-* @param {any} val
-* @param {string} job
-* @param {number} cost
-* @returns {any}
-*/
-export function return_all_combis2(val, job, cost) {
-    try {
-        var ptr0 = passStringToWasm0(job, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        var ret = wasm.return_all_combis2(addBorrowedObject(val), ptr0, len0, cost);
-        return takeObject(ret);
-    } finally {
-        heap[stack_pointer++] = undefined;
-    }
-}
-
-/**
-* @param {any} val
-* @param {string} job
 * @param {number} cost
 * @param {string} param
 * @returns {any}
@@ -166,23 +133,6 @@ export function return_all_combis3(val, job, cost, param) {
         return takeObject(ret);
     } finally {
         heap[stack_pointer++] = undefined;
-    }
-}
-
-/**
-* @returns {string}
-*/
-export function function_test() {
-    try {
-        const retptr = wasm.__wbindgen_export_2.value - 16;
-        wasm.__wbindgen_export_2.value = retptr;
-        wasm.function_test(retptr);
-        var r0 = getInt32Memory0()[retptr / 4 + 0];
-        var r1 = getInt32Memory0()[retptr / 4 + 1];
-        return getStringFromWasm0(r0, r1);
-    } finally {
-        wasm.__wbindgen_export_2.value += 16;
-        wasm.__wbindgen_free(r0, r1);
     }
 }
 
@@ -236,9 +186,6 @@ async function init(input) {
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
-    };
-    imports.wbg.__wbg_log_682923c8ea4d4d53 = function(arg0, arg1) {
-        log(getStringFromWasm0(arg0, arg1));
     };
 
     if (typeof input === 'string' || (typeof Request === 'function' && input instanceof Request) || (typeof URL === 'function' && input instanceof URL)) {

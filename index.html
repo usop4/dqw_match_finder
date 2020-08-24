@@ -25,7 +25,7 @@
         <div class="col-md-2 themed-grid-col">
 
           <label for="range-1">コスト {{ cost }}</label>
-          <b-form-input id="range-1" v-model="cost" type="range" min="0" max="350"></b-form-input>
+          <b-form-input id="range-1" v-model="cost" type="range" min="100" max="350"></b-form-input>
   
           <div class="form-check">
             <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
@@ -86,7 +86,7 @@
                 <th><span class="vertical">かいふく魔力</span></th>
                 <th><span class="vertical">すばやさ</span></th>
                 <th><span class="vertical">きようさ</span></th>
-                <th>組み合わせ {{ combi_num }}</th>
+                <th>組み合わせ</th>
               </tr>  
             </thead>
             <tbody>
