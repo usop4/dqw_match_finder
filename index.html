@@ -8,69 +8,90 @@
 
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
-
+    <link type="text/css" rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/insight.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/graph.min.css" />
+    
     <style>
       .vertical {
         writing-mode: vertical-rl;
       }
+      #chart {
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
+
     <div class="container" id="app">
 
       <h1>dqw match finder</h1>
 
       <div class="row mb-3">
 
-        <div class="col-md-2 themed-grid-col">
+        <div class="col-md-2 themed-grid-col" id="sticky-sidebar">
+          <div class="sticky-top">
 
-          <label for="range-1">コスト {{ cost }}</label>
-          <b-form-input id="range-1" v-model="cost" type="range" min="100" max="350"></b-form-input>
-  
-          <div class="form-check">
-            <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
-            <label class="form-check-label" for="j1">戦士</label>
-          </div>
-          <div class="form-check">
-            <input value="魔法使い" v-model="job" class="form-check-input" type="radio" name="job" id="j2">
-            <label class="form-check-label" for="j2">魔法使い</label>
-          </div>
-          <div class="form-check">
-            <input value="僧侶" v-model="job" class="form-check-input" type="radio" name="job" id="j3">
-            <label class="form-check-label" for="j3">僧侶</label>
-          </div>
-          <div class="form-check">
-            <input value="武闘家" v-model="job" class="form-check-input" type="radio" name="job" id="j4">
-            <label class="form-check-label" for="j4">武闘家</label>
-          </div>
-          <div class="form-check">
-            <input value="盗賊" v-model="job" class="form-check-input" type="radio" name="job" id="j5">
-            <label class="form-check-label" for="j5">盗賊</label>
-          </div>
-          <div class="form-check">
-            <input value="レンジャー" v-model="job" class="form-check-input" type="radio" name="job" id="j6">
-            <label class="form-check-label" for="j6">レンジャー</label>
-          </div>
-          <div class="form-check">
-            <input value="賢者" v-model="job" class="form-check-input" type="radio" name="job" id="j7">
-            <label class="form-check-label" for="j7">賢者</label>
-          </div>
-          <div class="form-check">
-            <input value="バトルマスター" v-model="job" class="form-check-input" type="radio" name="job" id="j8">
-            <label class="form-check-label" for="j8">バトルマスター</label>
-          </div>
-          <div class="form-check">
-            <input value="魔法戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j9">
-            <label class="form-check-label" for="j9">魔法戦士</label>
-          </div>
-          <div class="form-check">
-            <input value="パラディン" v-model="job" class="form-check-input" type="radio" name="job" id="j10">
-            <label class="form-check-label" for="j10">パラディン</label>
+            <label for="range-1">コスト {{ cost }}</label>
+            <b-form-input id="range-1" v-model="cost" type="range" min="100" max="350"></b-form-input>
+    
+            <div class="form-check">
+              <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
+              <label class="form-check-label" for="j1">戦士</label>
+            </div>
+            <div class="form-check">
+              <input value="魔法使い" v-model="job" class="form-check-input" type="radio" name="job" id="j2">
+              <label class="form-check-label" for="j2">魔法使い</label>
+            </div>
+            <div class="form-check">
+              <input value="僧侶" v-model="job" class="form-check-input" type="radio" name="job" id="j3">
+              <label class="form-check-label" for="j3">僧侶</label>
+            </div>
+            <div class="form-check">
+              <input value="武闘家" v-model="job" class="form-check-input" type="radio" name="job" id="j4">
+              <label class="form-check-label" for="j4">武闘家</label>
+            </div>
+            <div class="form-check">
+              <input value="盗賊" v-model="job" class="form-check-input" type="radio" name="job" id="j5">
+              <label class="form-check-label" for="j5">盗賊</label>
+            </div>
+            <div class="form-check">
+              <input value="遊び人" v-model="job" class="form-check-input" type="radio" name="job" id="j11">
+              <label class="form-check-label" for="j11">遊び人</label>
+            </div>
+            <div class="form-check">
+              <input value="踊り子" v-model="job" class="form-check-input" type="radio" name="job" id="j12">
+              <label class="form-check-label" for="j12">踊り子</label>
+            </div>
+            <div class="form-check">
+              <input value="レンジャー" v-model="job" class="form-check-input" type="radio" name="job" id="j6">
+              <label class="form-check-label" for="j6">レンジャー</label>
+            </div>
+            <div class="form-check">
+              <input value="賢者" v-model="job" class="form-check-input" type="radio" name="job" id="j7">
+              <label class="form-check-label" for="j7">賢者</label>
+            </div>
+            <div class="form-check">
+              <input value="バトルマスター" v-model="job" class="form-check-input" type="radio" name="job" id="j8">
+              <label class="form-check-label" for="j8">バトルマスター</label>
+            </div>
+            <div class="form-check">
+              <input value="魔法戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j9">
+              <label class="form-check-label" for="j9">魔法戦士</label>
+            </div>
+            <div class="form-check">
+              <input value="パラディン" v-model="job" class="form-check-input" type="radio" name="job" id="j10">
+              <label class="form-check-label" for="j10">パラディン</label>
+            </div>
+
+            <label for="range-2">表示数 {{ combis_size }}</label>
+            <b-form-input id="range-2" v-model="combis_size" type="range" min="1" max="1000"></b-form-input>
+
           </div>
         </div>
 
 
-        <div class="col-md-10 themed-grid-col">
+        <div class="col-md-10 themed-grid-col" id="main">
           <!--
           <b-table :items="listCombis()" :fields="fields"></b-table>
           -->
@@ -86,7 +107,9 @@
                 <th><span class="vertical">かいふく魔力</span></th>
                 <th><span class="vertical">すばやさ</span></th>
                 <th><span class="vertical">きようさ</span></th>
-                <th>組み合わせ</th>
+                <th>
+                  <b-form-input v-model="remove" placeholder="除外するモンスター"></b-form-input>
+                </th>
               </tr>  
             </thead>
             <tbody>
@@ -102,7 +125,7 @@
                 <td><input value="skill" v-model="param" type="radio"></td>
                 <td>-</td>
               </tr>
-              <tr v-for="(combi,i) in listCombis()">
+              <tr v-for="(combi,i) in listCombis()" v-on:click="test(i)">
                 <td>{{ combi.cost }}</td>
                 <td>{{ combi.hp }}</td>
                 <td>{{ combi.mp }}</td>
@@ -122,9 +145,7 @@
 
     <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
-
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="index.js" type="module"></script>
     <script>

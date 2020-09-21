@@ -1,21 +1,25 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
-* @param {any} val
-* @param {string} job
-* @param {number} cost
-* @param {string} param
+*/
+export function initialize(): void;
+/**
+* @param {any} monsters
+* @param {any} options
 * @returns {any}
 */
-export function return_all_combis3(val: any, job: string, cost: number, param: string): any;
+export function return_all_combis2(monsters: any, options: any): any;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly return_all_combis3: (a: number, b: number, c: number, d: number, e: number, f: number) => number;
+  readonly initialize: () => void;
+  readonly return_all_combis2: (a: number, b: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
+  readonly __wbindgen_start: () => void;
 }
 
 /**
