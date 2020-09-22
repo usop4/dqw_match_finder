@@ -8,9 +8,10 @@
 
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+    <!--
     <link type="text/css" rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/insight.min.css" />
     <link type="text/css" rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/graph.min.css" />
-    
+    -->
     <style>
       .vertical {
         writing-mode: vertical-rl;
@@ -84,6 +85,10 @@
               <label class="form-check-label" for="j10">パラディン</label>
             </div>
 
+            <div>
+              <button v-on:click="csvtest">test</button>
+            </div>
+
             <label for="range-2">表示数 {{ combis_size }}</label>
             <b-form-input id="range-2" v-model="combis_size" type="range" min="1" max="1000"></b-form-input>
 
@@ -125,7 +130,7 @@
                 <td><input value="skill" v-model="param" type="radio"></td>
                 <td>-</td>
               </tr>
-              <tr v-for="(combi,i) in listCombis()" v-on:click="test(i)">
+              <tr v-for="(combi,i) in listCombisCsv()" v-on:click="test(i)">
                 <td>{{ combi.cost }}</td>
                 <td>{{ combi.hp }}</td>
                 <td>{{ combi.mp }}</td>

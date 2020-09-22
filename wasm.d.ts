@@ -4,18 +4,18 @@
 */
 export function initialize(): void;
 /**
-* @param {any} monsters
+* @param {string} monsters
 * @param {any} options
 * @returns {any}
 */
-export function return_all_combis2(monsters: any, options: any): any;
+export function return_all_combis2_csv(monsters: string, options: any): any;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly initialize: () => void;
-  readonly return_all_combis2: (a: number, b: number) => number;
+  readonly return_all_combis2_csv: (a: number, b: number, c: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
   readonly __wbindgen_free: (a: number, b: number) => void;

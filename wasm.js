@@ -122,16 +122,17 @@ function addBorrowedObject(obj) {
     return stack_pointer;
 }
 /**
-* @param {any} monsters
+* @param {string} monsters
 * @param {any} options
 * @returns {any}
 */
-export function return_all_combis2(monsters, options) {
+export function return_all_combis2_csv(monsters, options) {
     try {
-        var ret = wasm.return_all_combis2(addBorrowedObject(monsters), addBorrowedObject(options));
+        var ptr0 = passStringToWasm0(monsters, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len0 = WASM_VECTOR_LEN;
+        var ret = wasm.return_all_combis2_csv(ptr0, len0, addBorrowedObject(options));
         return takeObject(ret);
     } finally {
-        heap[stack_pointer++] = undefined;
         heap[stack_pointer++] = undefined;
     }
 }
@@ -186,9 +187,6 @@ async function init(input) {
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
-    };
-    imports.wbg.__wbg_log_682923c8ea4d4d53 = function(arg0, arg1) {
-        log(getStringFromWasm0(arg0, arg1));
     };
     imports.wbg.__wbg_new_59cb74e423758ede = function() {
         var ret = new Error();
