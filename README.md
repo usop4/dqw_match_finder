@@ -1,9 +1,7 @@
 # dqw_match_finder
 
-ドラクエウォークで、自分の手持ちのこころの組み合わせを表示するサイトです。
+ドラクエウォークで、手持ちのこころから最適の組み合わせを表示するサイトです。wasm(WebAssembly)で実装しています。
 
 https://usop4.github.io/dqw_match_finder/index.html
 
-github pagesでは動作確認用に作者（私）が持ってるこころをmonster.jsonに設定しています。
-
-ダウンロードもしくはgit cloneしてmonster.jsonを書き換えてお使えください。
+github pagesではデモ用に作者（私）が持ってるこころをmonster.csvに設定していますので、ダウンロードもしくはgit cloneして各自のゲームデータをmonster.csvに置き換えてお使いください。
