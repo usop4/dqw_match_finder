@@ -29,6 +29,7 @@
         <div class="col-md-2 themed-grid-col" id="sticky-sidebar">
           <div class="sticky-top">
     
+
             <div class="form-check">
               <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
               <label class="form-check-label" for="j1">戦士</label>
@@ -99,8 +100,13 @@
               </b-button-group>          
             </div>
 
-            <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/usop4/dqw_match_finder">
-
+            <div>
+              <a class="github-button" href="https://github.com/usop4" aria-label="Follow @usop4 on GitHub">Follow @usop4</a>
+              <a class="github-button" href="https://github.com/usop4/dqw_match_finder/archive/master.zip" data-icon="octicon-download" aria-label="Download usop4/dqw_match_finder on GitHub">Download</a>
+              <a class="github-button" href="https://github.com/usop4/dqw_match_finder" data-icon="octicon-star" aria-label="Star usop4/dqw_match_finder on GitHub">Star</a>  
+              <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/usop4/dqw_match_finder">  
+            </div>
+    
           </div>
         </div>
 
@@ -230,6 +236,7 @@
 
       </div>
 
+    <script async defer src="//buttons.github.io/buttons.js"></script>
     <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
@@ -240,5 +247,5 @@
         console.log(val);
       }
     </script>
-  </body>
+</body>
 </html>
