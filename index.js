@@ -6,11 +6,11 @@ import * as mod from "./wasm.js";
       data: {
         monsters: null,
         combis: null,
-        job: "戦士",
-        cost: 350,
-        param: "cost",
+        job: "賢者",
+        cost: 380,
+        param: "recover",
         remove: "",
-        combis_size: 10,
+        combis_size: 3,
         csv: null
       },
       mounted: function(){
@@ -22,21 +22,6 @@ import * as mod from "./wasm.js";
         );
     },
       methods:{
-        /*
-        listCombis: function(){
-          let s = mod.return_all_combis2(
-            this.monsters,
-            {
-              cost: parseInt(this.cost),
-              job: this.job,
-              param: this.param,
-              remove: this.remove,
-              combis_size: parseInt(this.combis_size)
-            });
-          this.combis = s.combis;
-          return s.combis;
-        },
-        */
         listCombisCsv: function(){
           let s = mod.return_all_combis2_csv(
             this.csv,
@@ -50,10 +35,16 @@ import * as mod from "./wasm.js";
           this.combis = s.combis;
           return s.combis;
         },
+        set_cost: function(n){
+          this.cost = parseInt(this.cost) + parseInt(n);
+        },
+        set_combis_size: function(n){
+          this.combis_size = n;
+        },
         csvtest: function(event){
           console.log(this.csv);
           mod.csv_test(this.csv);
-        }
+        },
       }
     })
 })();

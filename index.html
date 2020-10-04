@@ -8,10 +8,6 @@
 
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
-    <!--
-    <link type="text/css" rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/insight.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/theme/graph.min.css" />
-    -->
     <style>
       .vertical {
         writing-mode: vertical-rl;
@@ -32,9 +28,6 @@
 
         <div class="col-md-2 themed-grid-col" id="sticky-sidebar">
           <div class="sticky-top">
-
-            <label for="range-1">コスト {{ cost }}</label>
-            <b-form-input id="range-1" v-model="cost" type="range" min="100" max="350"></b-form-input>
     
             <div class="form-check">
               <input value="戦士" v-model="job" class="form-check-input" type="radio" name="job" id="j1" checked>
@@ -86,20 +79,33 @@
             </div>
 
             <div>
-              <button v-on:click="csvtest">test</button>
+              <label for="range-1">コスト {{ cost }}</label>
+              <b-form-input id="range-1" v-model="cost" type="range" min="100" max="350"></b-form-input>
+              <b-button-group size="sm">
+                <b-button v-on:click="set_cost(-10)">-10</b-button>
+                <b-button v-on:click="set_cost(-1)">-1</b-button>
+                <b-button v-on:click="set_cost(+1)">+1</b-button>
+                <b-button v-on:click="set_cost(+10)">+10</b-button>
+              </b-button-group>          
             </div>
 
-            <label for="range-2">表示数 {{ combis_size }}</label>
-            <b-form-input id="range-2" v-model="combis_size" type="range" min="1" max="1000"></b-form-input>
+            <div>
+              <label for="range-2">表示数 {{ combis_size }}</label>
+              <b-form-input id="range-2" v-model="combis_size" type="range" min="1" max="1000"></b-form-input>
+              <b-button-group size="sm">
+                <b-button v-on:click="set_combis_size(3)">3</b-button>
+                <b-button v-on:click="set_combis_size(10)">10</b-button>
+                <b-button v-on:click="set_combis_size(100)">100</b-button>
+              </b-button-group>          
+            </div>
+
+            <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/usop4/dqw_match_finder">
 
           </div>
         </div>
 
 
         <div class="col-md-10 themed-grid-col" id="main">
-          <!--
-          <b-table :items="listCombis()" :fields="fields"></b-table>
-          -->
           <table class="table table-sm table-bordered">
             <thead>
               <tr>
@@ -112,10 +118,10 @@
                 <th><span class="vertical">かいふく魔力</span></th>
                 <th><span class="vertical">すばやさ</span></th>
                 <th><span class="vertical">きようさ</span></th>
-                <th>
-                  <b-form-input v-model="remove" placeholder="除外するモンスター"></b-form-input>
-                </th>
-              </tr>  
+                <th><b-form-input v-model="remove" placeholder="除外するモンスター"></b-form-input></th>
+                <th>ダメージ</th>
+                <th>耐性</th>
+              </tr>
             </thead>
             <tbody>
               <tr>
@@ -128,7 +134,9 @@
                 <td><input value="recover" v-model="param" type="radio"></td>
                 <td><input value="speed" v-model="param" type="radio"></td>
                 <td><input value="skill" v-model="param" type="radio"></td>
-                <td>-</td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
               <tr v-for="(combi,i) in listCombisCsv()" v-on:click="test(i)">
                 <td>{{ combi.cost }}</td>
@@ -140,8 +148,82 @@
                 <td>{{ combi.recover }}</td>
                 <td>{{ combi.speed }}</td>
                 <td>{{ combi.skill }}</td>
-                <td>{{ combi.name }}</td>
-              </tr>  
+                <td style="white-space: pre;">{{ combi.name }}</td>
+                <td>
+                  {{ combi.skills }}
+                  <div v-show="combi.mera.tokugi > 0">メラ特技{{ combi.mera.tokugi }}</div>
+                  <div v-show="combi.mera.jumon > 0">メラ呪文{{ combi.mera.jumon }}</div>
+                  <div v-show="combi.hyado.tokugi > 0">ヒャド特技{{ combi.hyado.tokugi }}</div>
+                  <div v-show="combi.hyado.jumon > 0">ヒャド呪文{{ combi.hyado.jumon }}</div>
+                  <div v-show="combi.gira.tokugi > 0">ギラ特技{{ combi.gira.tokugi }}</div>
+                  <div v-show="combi.gira.jumon > 0">ギラ呪文{{ combi.gira.jumon }}</div>
+                  <div v-show="combi.bagi.tokugi > 0">バギ特技{{ combi.bagi.tokugi }}</div>
+                  <div v-show="combi.bagi.jumon > 0">バギ呪文{{ combi.bagi.jumon }}</div>
+                  <div v-show="combi.io.tokugi > 0">イオ特技{{ combi.io.tokugi }}</div>
+                  <div v-show="combi.io.jumon > 0">イオ呪文{{ combi.io.jumon }}</div>
+                  <div v-show="combi.doruma.tokugi > 0">ドルマ特技{{ combi.doruma.tokugi }}</div>
+                  <div v-show="combi.doruma.jumon > 0">ドルマ呪文{{ combi.doruma.jumon }}</div>
+                  <div v-show="combi.dein.tokugi > 0">デイン特技{{ combi.dein.tokugi }}</div>
+                  <div v-show="combi.dein.jumon > 0">デイン呪文{{ combi.dein.jumon }}</div>
+                  <div v-show="combi.jibaria.tokugi > 0">ジバリア特技{{ combi.jibaria.tokugi }}</div>
+                  <div v-show="combi.jibaria.jumon > 0">ジバリア呪文{{ combi.jibaria.jumon }}</div>
+
+                  <!--会心率、回避率、ガード率、暴走率-->
+                  <div v-show="combi.zangeki > 0">斬撃{{ combi.zangeki }}</div>
+                  <div v-show="combi.kaishin > 0">会心率{{ combi.kaishin }}</div>
+                  <div v-show="combi.boso > 0">暴走率{{ combi.boso }}</div>
+
+                  <div v-show="combi.slime.damage > 0">スライム系{{ combi.slime.damage }}</div>
+                  <div v-show="combi.kemono.damage > 0">けもの系{{ combi.kemono.damage }}</div>
+                  <div v-show="combi.dragon.damage > 0">ドラゴン系{{ combi.dragon.damage }}</div>
+                  <div v-show="combi.mushi.damage > 0">虫系{{ combi.mushi.damage }}</div>
+                  <div v-show="combi.tori.damage > 0">鳥系{{ combi.tori.damage }}</div>
+                  <div v-show="combi.shokubutsu.damage > 0">植物系{{ combi.shokubutsu.damage }}</div>
+                  <div v-show="combi.busshitsu.damage > 0">物質系{{ combi.busshitsu.damage }}</div>
+                  <div v-show="combi.machine.damage > 0">マシン系{{ combi.machine.damage }}</div>
+                  <div v-show="combi.zombi.damage > 0">ゾンビ系{{ combi.zombi.damage }}</div>
+                  <div v-show="combi.akuma.damage > 0">悪魔系{{ combi.akuma.damage }}</div>
+                  <div v-show="combi.element.damage > 0">エレメント系{{ combi.element.damage }}</div>
+                  <div v-show="combi.kaijin.damage > 0">怪人系{{ combi.kaijin.damage }}</div>
+                  <div v-show="combi.mizu.damage > 0">水系{{ combi.mizu.damage }}</div>
+
+                </td>
+                <td>
+                  <div v-show="combi.mera.taisei > 0">メラ{{ combi.mera.taisei }}</div>
+                  <div v-show="combi.hyado.taisei > 0">ヒャド{{ combi.hyado.taisei }}</div>
+                  <div v-show="combi.gira.taisei > 0">ギラ{{ combi.gira.taisei }}</div>
+                  <div v-show="combi.bagi.taisei > 0">バギ{{ combi.bagi.taisei }}</div>
+                  <div v-show="combi.io.taisei > 0">イオ{{ combi.io.taisei }}</div>
+                  <div v-show="combi.doruma.taisei > 0">ドルマ{{ combi.doruma.taisei }}</div>
+                  <div v-show="combi.dein.taisei > 0">デイン{{ combi.dein.taisei }}</div>
+                  <div v-show="combi.jibaria.taisei > 0">ジバリア{{ combi.jibaria.taisei }}</div>
+
+                  <div v-show="combi.doku > 0">毒{{ combi.doku }}</div>
+                  <div v-show="combi.mahi > 0">麻痺{{ combi.mahi }}</div>
+                  <div v-show="combi.konran > 0">混乱{{ combi.konran }}</div>
+                  <div v-show="combi.fuin > 0">封印{{ combi.fuin }}</div>
+                  <div v-show="combi.sokushi > 0">即死{{ combi.sokushi }}</div>
+                  <div v-show="combi.genwaku > 0">幻惑{{ combi.genwaku }}</div>
+                  <div v-show="combi.noroi > 0">呪い{{ combi.noroi }}</div>
+                  <div v-show="combi.miryo > 0">魅了{{ combi.miryo }}</div>
+                  <div v-show="combi.korobi > 0">転び{{ combi.korobi }}</div>
+                  <div v-show="combi.obie > 0">怯え{{ combi.obie }}</div>
+
+                  <div v-show="combi.slime.taisei > 0">スライム系{{ combi.slime.taisei }}</div>
+                  <div v-show="combi.kemono.taisei > 0">けもの系{{ combi.kemono.taisei }}</div>
+                  <div v-show="combi.dragon.taisei > 0">ドラゴン系{{ combi.dragon.taisei }}</div>
+                  <div v-show="combi.mushi.taisei > 0">虫系{{ combi.mushi.taisei }}</div>
+                  <div v-show="combi.tori.taisei > 0">鳥系{{ combi.tori.taisei }}</div>
+                  <div v-show="combi.shokubutsu.taisei > 0">植物系{{ combi.shokubutsu.taisei }}</div>
+                  <div v-show="combi.busshitsu.taisei > 0">物質系{{ combi.busshitsu.taisei }}</div>
+                  <div v-show="combi.machine.taisei > 0">マシン系{{ combi.machine.taisei }}</div>
+                  <div v-show="combi.zombi.taisei > 0">ゾンビ系{{ combi.zombi.taisei }}</div>
+                  <div v-show="combi.akuma.taisei > 0">悪魔系{{ combi.akuma.taisei }}</div>
+                  <div v-show="combi.element.taisei > 0">エレメント系{{ combi.element.taisei }}</div>
+                  <div v-show="combi.kaijin.taisei > 0">怪人系{{ combi.kaijin.taisei }}</div>
+                  <div v-show="combi.mizu.taisei > 0">水系{{ combi.mizu.taisei }}</div>
+
+                </tr>
             </tbody>
           </table>
         </div>
